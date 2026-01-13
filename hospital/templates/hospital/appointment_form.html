@@ -1,0 +1,39 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<h1>Add Appointment</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Patient</label>
+        <select name="patient" class="form-control" required>
+            <option value="">Select Patient</option>
+            {% for patient in patients %}
+                <option value="{{ patient.id }}">{{ patient.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Doctor</label>
+        <select name="doctor" class="form-control" required>
+            <option value="">Select Doctor</option>
+            {% for doctor in doctors %}
+                <option value="{{ doctor.id }}">{{ doctor.name }} ({{ doctor.department.name }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Date</label>
+        <input type="date" name="date" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Time</label>
+        <input type="time" name="time" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

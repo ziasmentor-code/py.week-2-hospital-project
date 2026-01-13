@@ -1,0 +1,71 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto my-12 p-8 bg-white rounded-2xl shadow-lg">
+    <h2 class="text-3xl font-bold text-blue-600 mb-8 flex items-center gap-2">
+        <i class="fas fa-calendar-check"></i> Book Appointment
+    </h2>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Patient Name -->
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Patient Name</label>
+            <input type="text" name="patient_name" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+
+        <!-- Age -->
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Age</label>
+            <input type="number" name="age" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+
+        <!-- Contact -->
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Contact</label>
+            <input type="text" name="contact" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+
+        <!-- Select Doctor -->
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Select Doctor</label>
+            <select name="doctor" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                {% for doctor in doctors %}
+                    <option value="{{ doctor.id }}">{{ doctor.name }} ({{ doctor.department.name }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Date -->
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Date</label>
+            <input type="date" name="date" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+
+        <!-- Time -->
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Time</label>
+            <input type="time" name="time" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-4 mt-4">
+            <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition">
+                Book Appointment
+            </button>
+            <a href="/" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-lg text-center transition">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+

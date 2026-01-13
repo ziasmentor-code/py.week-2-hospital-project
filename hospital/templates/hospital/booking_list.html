@@ -1,0 +1,75 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto my-12 p-6 bg-white rounded-2xl shadow-lg">
+    
+    <h2 class="text-3xl font-bold text-blue-600 mb-6 flex items-center gap-2">
+        <i class="fas fa-list-check"></i> Bookings
+    </h2>
+
+    <!-- Add Booking button -->
+    <div class="mb-6 text-right">
+        <a href="{% url 'booking_create' %}"
+           class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+            ➕ Add Booking
+        </a>
+    </div>
+
+    {% if bookings %}
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 border rounded-lg overflow-hidden">
+            <thead class="bg-blue-100">
+                <tr>
+                    <th class="px-4 py-2 text-left">Patient</th>
+                    <th class="px-4 py-2 text-left">Age</th>
+                    <th class="px-4 py-2 text-left">Contact</th>
+                    <th class="px-4 py-2 text-left">Doctor</th>
+                    <th class="px-4 py-2 text-left">Department</th>
+                    <th class="px-4 py-2 text-left">Date</th>
+                    <th class="px-4 py-2 text-left">Time</th>
+                    <th class="px-4 py-2 text-left">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+                {% for booking in bookings %}
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-4 py-2">{{ booking.patient.name }}</td>
+                    <td class="px-4 py-2">{{ booking.patient.age }}</td>
+                    <td class="px-4 py-2">{{ booking.patient.contact }}</td>
+                    <td class="px-4 py-2">{{ booking.doctor.name }}</td>
+                    <td class="px-4 py-2">{{ booking.doctor.department.name }}</td>
+                    <td class="px-4 py-2">{{ booking.date }}</td>
+                    <td class="px-4 py-2">{{ booking.time }}</td>
+
+                    <!-- Actions -->
+                    <td class="px-4 py-2 flex gap-4">
+                        <a href="{% url 'booking_edit' booking.id %}"
+                           class="text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-pen"></i>
+                        </a>
+
+                        <a href="{% url 'booking_delete' booking.id %}"
+                           onclick="return confirm('Are you sure you want to delete?')"
+                           class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-gray-500 text-center mt-4">No bookings yet.</p>
+    {% endif %}
+
+    <div class="mt-6 text-center">
+        <a href="{% url 'home' %}"
+           class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            ← Back to Home
+        </a>
+    </div>
+
+</div>
+{% endblock %}

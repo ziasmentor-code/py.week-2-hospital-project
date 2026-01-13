@@ -1,0 +1,31 @@
+{% extends 'hospital/base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10">
+    <a href="{% url 'patient_create' %}"
+       class="bg-green-600 text-white px-4 py-2 rounded">
+        + Add Patient
+    </a>
+
+    <table class="w-full mt-6 bg-white shadow rounded">
+        <tr class="bg-gray-200">
+            <th class="p-2">Name</th>
+            <th>Age</th>
+            <th>Disease</th>
+            <th>Action</th>
+        </tr>
+
+        {% for p in patients %}
+        <tr class="border-t">
+            <td class="p-2">{{ p.name }}</td>
+            <td>{{ p.age }}</td>
+            <td>{{ p.disease }}</td>
+            <td>
+                <a href="{% url 'patient_edit' p.id %}" class="text-blue-600">
+                    Edit
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

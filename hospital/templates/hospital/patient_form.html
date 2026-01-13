@@ -1,0 +1,45 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow">
+    <h2 class="text-2xl font-bold mb-4">
+        {% if patient %}Edit{% else %}Add{% endif %} Patient
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="name"
+                   value="{{ patient.name|default:'' }}"
+                   class="w-full p-2 border rounded" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Age</label>
+            <input type="number" name="age"
+                   value="{{ patient.age|default:'' }}"
+                   class="w-full p-2 border rounded" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Disease</label>
+            <select name="disease" class="w-full p-2 border rounded">
+                <option value="Fever" {% if patient.disease == "Fever" %}selected{% endif %}>Fever</option>
+                <option value="Covid" {% if patient.disease == "Covid" %}selected{% endif %}>Covid</option>
+                <option value="Headache" {% if patient.disease == "Headache" %}selected{% endif %}>Headache</option>
+                <option value="Flu" {% if patient.disease == "Flu" %}selected{% endif %}>Flu</option>
+            </select>
+        </div>
+
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">
+            Save
+        </button>
+
+        <a href="{% url 'patient_list' %}" class="ml-2 text-gray-600">
+            Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}

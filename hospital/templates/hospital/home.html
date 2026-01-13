@@ -1,0 +1,36 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gradient-to-br from-blue-600 to-purple-600 py-16 px-4 flex flex-col items-center">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-extrabold text-white mb-4">🏥 Hospital Management System</h1>
+        <p class="text-lg text-white/90">Welcome to our hospital</p>
+    </div>
+
+    <!-- Dashboard Icons -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-5xl w-full text-center">
+        <!-- Departments -->
+        <a href="{% url 'department_list' %}" class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300">
+            <i class="fas fa-hospital fa-3x text-blue-600 mb-3"></i>
+            <span class="font-semibold text-gray-800">Departments</span>
+        </a>
+
+        <!-- Doctors -->
+        <a href="{% url 'doctor_list' %}" class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300">
+            <i class="fas fa-user-md fa-3x text-purple-600 mb-3"></i>
+            <span class="font-semibold text-gray-800">Doctors</span>
+        </a>
+
+        <!-- Bookings / Appointments -->
+        <a href="{% url 'booking_list' %}" class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300">
+            <i class="fas fa-calendar-check fa-3x text-red-600 mb-3"></i>
+            <span class="font-semibold text-gray-800">Bookings</span>
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<h1 style="padding:40px; font-size:30px;">
+    Doctors page loaded ✅
+</h1>
+
+<p style="padding-left:40px;">
+    Department: {{ department.name }}
+</p>
+
+{% for doctor in doctors %}
+    <p style="padding-left:40px;">
+        Dr. {{ doctor.name }}
+    </p>
+{% empty %}
+    <p style="padding-left:40px;">
+        No doctors found
+    </p>
+{% endfor %}
+
+{% endblock %}
