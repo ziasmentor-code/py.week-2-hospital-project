@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Department, Doctor, Patient, Booking
+from .models import Department, Doctor, Patient, Booking,MedicalRecord
 
 
 def home(request):
+   
     recent_bookings = Booking.objects.select_related(
         'patient', 'doctor', 'doctor__department'
     ).order_by('-date', '-time')[:5]
@@ -128,4 +129,7 @@ def booking_delete(request, id):
     booking = get_object_or_404(Booking, id=id)
     booking.delete()
     return redirect('booking_list')
+
+def medical_records(request, patient_id):
+    patient=get
 
